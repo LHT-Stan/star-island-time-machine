@@ -445,20 +445,7 @@ const handleCrystalClick = () => {
     console.log('showCrystalNumber状态:', showCrystalNumber.value)
 
     // 立即显示提示
-    showGlobalHint('水晶反射中出现了神秘数字！')
-
-    // 5秒后自动收集数字
-    setTimeout(() => {
-      const success = numberCollector.collectNumber(1, 8, 'crystal_reflection')
-      if (success) {
-        numberCollected.value = true
-        showCrystalNumber.value = false
-        console.log('🎉 成功收集数字8!')
-
-        // 显示收集成功提示
-        showGlobalHint('一个神秘的数字，似乎代表了什么意义。')
-      }
-    }, 5000)
+    showGlobalHint('水晶反射中出现了神秘数字！点击数字8收集它！')
   }
 }
 
@@ -806,7 +793,8 @@ onUnmounted(() => {
   cursor: pointer;
   border-radius: 50%;
   transition: all 0.3s ease;
-  z-index: 3;
+  z-index: 100;  /* 提高z-index确保在最顶层 */
+  pointer-events: auto;  /* 确保可以点击 */
 }
 
 .secret-crystal-area:hover {
@@ -821,8 +809,9 @@ onUnmounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 10;  /* 确保在最顶层 */
+  z-index: 101;  /* 确保在水晶区域之上 */
   transition: all 0.5s ease;
+  pointer-events: auto;  /* 确保可以点击 */
 }
 
 .crystal-number .number-reflection {
