@@ -795,11 +795,27 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   z-index: 100;  /* 提高z-index确保在最顶层 */
   pointer-events: auto;  /* 确保可以点击 */
+  background: rgba(255, 215, 0, 0.05);  /* 添加微弱的金色背景 */
+  border: 2px dashed rgba(255, 215, 0, 0.3);  /* 添加虚线边框提示 */
+  animation: crystalPulse 3s ease-in-out infinite;  /* 添加脉动动画 */
 }
 
 .secret-crystal-area:hover {
-  background: rgba(255, 215, 0, 0.1);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  border-color: rgba(255, 215, 0, 0.6);
+}
+
+/* 水晶区域脉动动画 */
+@keyframes crystalPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
 }
 
 /* 水晶反射数字 */
