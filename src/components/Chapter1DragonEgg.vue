@@ -2,7 +2,7 @@
   <div class="chapter1" :class="{ active: isActive }">
     <!-- 水晶岛虚化背景 -->
     <div class="crystal-background">
-      <img src="/star-island-time-machine/images/Crystal_Island.png" alt="水晶岛背景" />
+      <img src="/images/Crystal_Island.png" alt="水晶岛背景" />
       <div class="background-overlay"></div>
 
       <!-- 隐藏的数字收集区域 (只有孵化后才能点击) -->
@@ -48,7 +48,7 @@
         @keydown.enter="onEggClick"
         @keydown.space="onEggClick"
       >
-        <img src="/star-island-time-machine/images/Wyvern_Egg_Fire.png" alt="火龙蛋" />
+        <img src="/images/Wyvern_Egg_Fire.png" alt="火龙蛋" />
         
         <!-- 蛋壳碎片 -->
         <div v-if="isHatching" class="egg-fragments">
@@ -64,12 +64,12 @@
         <div v-if="isHatched" class="friendship-avatars">
           <div class="avatar-container">
             <div class="avatar">
-              <img src="/star-island-time-machine/images/me.jpg" alt="我" />
+              <img src="/images/me.jpg" alt="我" />
               <div class="avatar-glow"></div>
             </div>
             <div class="friendship-heart">💖</div>
             <div class="avatar">
-              <img src="/star-island-time-machine/images/her.jpg" alt="她" />
+              <img src="/images/her.jpg" alt="她" />
               <div class="avatar-glow"></div>
             </div>
           </div>
