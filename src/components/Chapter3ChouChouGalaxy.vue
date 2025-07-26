@@ -70,7 +70,7 @@
         @keydown.enter="onChouChouClick"
         @keydown.space="onChouChouClick"
       >
-        <img src="/images/dog.jpg" alt="臭臭" />
+        <img src="/star-island-time-machine/images/dog.jpg" alt="臭臭" />
         
         <!-- 心情指示器 -->
         <div class="mood-indicator">

@@ -30,7 +30,7 @@
       @keydown.enter="onSpriteClick"
       @keydown.space="onSpriteClick"
     >
-      <img src="/images/dog.jpg" alt="悟空" />
+      <img src="/star-island-time-machine/images/dog.jpg" alt="悟空" />
       <div v-if="showParticles" class="golden-particles"></div>
       <div class="sprite-halo"></div>
     </div>
@@ -120,7 +120,7 @@
         <!-- 悟空头像区域 -->
         <div class="wukong-header">
           <div class="wukong-avatar">
-            <img src="/images/dog.jpg" alt="悟空" />
+            <img src="/star-island-time-machine/images/dog.jpg" alt="悟空" />
             <div class="avatar-halo-effect"></div>
           </div>
           <div class="wukong-title">
