@@ -175,7 +175,7 @@
     </div>
 
     <!-- 数字7显示区域 -->
-    <div v-if="showNumber7 && !number7Collected"
+    <div v-if="showNumber7 && !number7Collected && shouldShowNumber7"
          class="number-display number-7"
          @click="handleNumber7Click">
       <span class="number-reflection">7</span>
@@ -297,6 +297,11 @@ const snackClouds = reactive([
 // 数字收集系统 - 第三章数字7
 const showNumber7 = ref(false)
 const number7Collected = ref(false)
+
+// 检查是否应该显示数字7（基于收集顺序）
+const shouldShowNumber7 = computed(() => {
+  return numberCollector.shouldShowNumber(3, 7)
+})
 
 // 成就数据
 const achievements = [

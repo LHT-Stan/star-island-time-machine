@@ -44,7 +44,7 @@ class NumberCollector {
   // 收集数字
   collectNumber(chapterNumber, number, source = '') {
     console.log(`🔢 尝试收集数字: ${number} (来自第${chapterNumber}章 - ${source})`)
-    
+
     // 检查是否已经收集过这个位置的数字
     const positionKey = `chapter${chapterNumber}_${source}`
     if (this.chapterProgress[positionKey]) {
@@ -101,6 +101,30 @@ class NumberCollector {
       collectedNumbers: [...this.collectedNumbers],
       chapterProgress: { ...this.chapterProgress }
     }
+  }
+
+  // 检查指定章节的数字是否应该显示
+  shouldShowNumber(chapterNumber, number) {
+    // 找到这个数字在目标序列中的位置
+    let targetIndex = -1
+    let sameNumberCount = 0
+
+    for (let i = 0; i < this.targetSequence.length; i++) {
+      if (this.targetSequence[i] === number) {
+        if (sameNumberCount === this.collectedNumbers.filter(n => n === number).length) {
+          targetIndex = i
+          break
+        }
+        sameNumberCount++
+      }
+    }
+
+    if (targetIndex === -1) {
+      return false // 数字不在序列中或已收集完
+    }
+
+    // 只有当前面的数字都收集完了，才显示这个数字
+    return this.collectedNumbers.length >= targetIndex
   }
 
   // 检查特定章节是否已收集

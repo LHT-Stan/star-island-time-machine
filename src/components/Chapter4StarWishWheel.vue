@@ -73,7 +73,7 @@
     </div>
 
     <!-- 数字3显示区域 -->
-    <div v-if="showNumber3 && !number3Collected"
+    <div v-if="showNumber3 && !number3Collected && shouldShowNumber3"
          class="number-display number-3"
          @click="handleNumber3Click">
       <span class="number-reflection">3</span>
@@ -178,7 +178,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, onUnmounted, Teleport } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, computed, Teleport } from 'vue'
 import spiritImageUrl from '../assets/images/baiye.jpg'
 import numberCollector from '../utils/numberCollector.js'
 
@@ -330,6 +330,11 @@ export default {
     // 数字收集系统 - 第四章数字3
     const showNumber3 = ref(false)
     const number3Collected = ref(false)
+
+    // 检查是否应该显示数字3（基于收集顺序）
+    const shouldShowNumber3 = computed(() => {
+      return numberCollector.shouldShowNumber(4, 3)
+    })
 
     // 抽奖概率配置
     const probabilityConfig = {
@@ -1390,6 +1395,7 @@ export default {
       // 数字收集相关
       showNumber3,
       number3Collected,
+      shouldShowNumber3,
       handleNumber3Click
     }
   }

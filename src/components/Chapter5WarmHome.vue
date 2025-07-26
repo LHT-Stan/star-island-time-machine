@@ -74,7 +74,7 @@
       </div>
 
       <!-- 数字0显示区域 -->
-      <div v-if="showNumber0 && !number0Collected"
+      <div v-if="showNumber0 && !number0Collected && shouldShowNumber0"
            class="number-display number-0"
            @click="handleNumber0Click">
         <span class="number-reflection">0</span>
@@ -284,6 +284,11 @@ export default {
     const number0Collected = ref(false)
     const photoClickSequence = ref([])
     const correctSequence = ['me', 'feier', 'chouchou']  // 小星 → 菲儿 → 臭臭
+
+    // 检查是否应该显示数字0（基于收集顺序）
+    const shouldShowNumber0 = computed(() => {
+      return numberCollector.shouldShowNumber(5, 0)
+    })
 
     // 信件查看系统
     const showLetterMenu = ref(false)
@@ -720,6 +725,7 @@ export default {
       // 数字收集相关
       showNumber0,
       number0Collected,
+      shouldShowNumber0,
       handlePhotoClick,
       handleNumber0Click,
 
