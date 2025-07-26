@@ -277,7 +277,7 @@ const memories = [
     location: "星空之下",
     time: "每个夜晚",
     duration: "永恒的承诺",
-    message: "无论距离多远，我们都会在同一片星空下思念彼此..."
+    message: "无论距离多远，我们都会是彼此可以信任的好朋友..."
   },
   {
     title: "时光见证",
@@ -796,16 +796,9 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   z-index: 100;  /* 提高z-index确保在最顶层 */
   pointer-events: auto;  /* 确保可以点击 */
-  background: rgba(255, 215, 0, 0.05);  /* 添加微弱的金色背景 */
-  border: 2px dashed rgba(255, 215, 0, 0.3);  /* 添加虚线边框提示 */
   animation: crystalPulse 3s ease-in-out infinite;  /* 添加脉动动画 */
 }
 
-.secret-crystal-area:hover {
-  background: rgba(255, 215, 0, 0.15);
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-  border-color: rgba(255, 215, 0, 0.6);
-}
 
 /* 水晶区域脉动动画 */
 @keyframes crystalPulse {
@@ -1509,7 +1502,8 @@ onUnmounted(() => {
   position: absolute;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  pointer-events: none; /* 容器本身不可点击，避免遮挡其他按钮 */
+  z-index: 15; /* 确保在合适的层级 */
 }
 
 .crystal-hint {
@@ -1528,9 +1522,10 @@ onUnmounted(() => {
   position: absolute;
   font-size: 24px;
   cursor: pointer;
-  pointer-events: auto;
+  pointer-events: auto !important; /* 强制启用点击事件 */
   animation: crystalFloat 3s ease-in-out infinite;
   transition: all 0.3s ease;
+  z-index: 20; /* 确保在最顶层 */
 }
 
 .crystal-cluster:hover {

@@ -29,11 +29,11 @@
         </div>
 
         <!-- 电脑顶部装饰 -->
-        <img
+        <!-- <img
           :src="computerTopImageUrl"
           alt="电脑顶部"
           class="computer-top"
-        >
+        > -->
 
         <!-- 生日贺卡 -->
         <img
@@ -65,7 +65,7 @@
         >
 
         <!-- 背景照片装饰 -->
-        <img :src="photoWallMe" alt="小星" class="background-photo photo-me" @click="handlePhotoClick('me')">
+        <img :src="photoWallMe" alt="白夜" class="background-photo photo-me" @click="handlePhotoClick('me')">
         <img :src="photoWallFeier1" alt="菲儿" class="background-photo photo-feier1" @click="handlePhotoClick('feier')">
         <img :src="photoWallFeier2" alt="菲儿" class="background-photo photo-feier2" @click="handlePhotoClick('feier')">
         <img :src="photoWallChouchou" alt="臭臭" class="background-photo photo-chouchou" @click="handlePhotoClick('chouchou')">
@@ -237,7 +237,7 @@
               <p class="greeting">我最爱的小主人：</p>
               <p>虽然我已经去了彩虹桥，但我一直在守护着你...</p>
               <p>每当夜晚降临，我就会化作星光，在你的梦中奔跑。看到你和臭臭一起玩耍，我就知道你过得很好。</p>
-              <p>记得我们一起在ARK世界里的冒险吗？你总是给我最好的食物，最温暖的拥抱。那些日子是我最快乐的时光。</p>
+              <p>我们还记得我们在一起的时光？你总是给我最好的食物，最温暖的拥抱。那些日子是我最快乐的时光。</p>
               <p>现在的我在彩虹桥这边很好，每天追着发光的蝴蝶，和其他小伙伴一起玩耍。但我最想念的，还是你的笑声。</p>
               <p>请不要为我难过，因为爱是永恒的。我会一直在星空中守护你，直到我们在彩虹桥重逢的那一天。</p>
               <p>要好好照顾自己，也要好好照顾臭臭。记住，无论何时，只要你抬头看星空，我就在那里。</p>
