@@ -187,7 +187,8 @@ export default {
   components: {
     Teleport
   },
-  setup() {
+  emits: ['next-chapter'],
+  setup(props, { emit }) {
     // 基础状态
     const isSpinning = ref(false)
     const showDialogue = ref(true)
@@ -1199,10 +1200,15 @@ export default {
       }, 1000)
     }
 
-    // 前往下一章
+    // 前往下一章（发射事件给父组件）
     const goToNextChapter = () => {
       console.log('🚀 前往第五章')
-      // TODO: 实现章节导航
+      try {
+        // 发射事件给父组件进行章节切换
+        emit('next-chapter')
+      } catch (error) {
+        console.log('导航错误:', error)
+      }
     }
 
     // 播放旋转音效

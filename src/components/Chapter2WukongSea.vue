@@ -554,10 +554,11 @@ const getCelebrationStarStyle = (index) => {
 
 // 删除不需要的摩斯密码相关方法
 
-// 导航到下一章
+// 导航到下一章（发射事件给父组件）
+const emit = defineEmits(['next-chapter'])
+
 const goToNextChapter = () => {
   console.log('🚀 下一章按钮被点击')
-  console.log('当前 isNavigating 状态:', isNavigating.value)
 
   if (isNavigating.value) {
     console.log('正在导航中，忽略点击')
@@ -565,20 +566,11 @@ const goToNextChapter = () => {
   }
 
   isNavigating.value = true
-  console.log('开始导航到第三章')
+  console.log('发射next-chapter事件')
 
   try {
-    const container = document.querySelector('.chapters-container')
-    if (container) {
-      console.log('找到章节容器，开始滚动')
-      container.scrollTo({
-        top: window.innerHeight * 2, // 第三章
-        behavior: 'smooth'
-      })
-      console.log('滚动到位置:', window.innerHeight * 2)
-    } else {
-      console.log('未找到章节容器')
-    }
+    // 发射事件给父组件进行章节切换
+    emit('next-chapter')
   } catch (error) {
     console.log('导航错误:', error)
   }
@@ -586,7 +578,7 @@ const goToNextChapter = () => {
   setTimeout(() => {
     isNavigating.value = false
     console.log('导航状态重置')
-  }, 2000)
+  }, 500)
 }
 
 // 删除触发隐藏章节方法

@@ -5,38 +5,53 @@
       <div class="stars"></div>
     </div>
     
-    <!-- 章节容器 -->
-    <div class="chapters-container" @scroll="handleScroll" ref="container">
+    <!-- 章节容器 - 固定视窗，禁用滚动 -->
+    <div class="chapters-container" ref="container">
       <!-- 第一章：龙蛋启航 -->
-      <Chapter1DragonEgg 
+      <Chapter1DragonEgg
+        :class="getChapterClass(1)"
         :isActive="currentChapter === 1"
         @chapter-complete="onChapterComplete"
-      />
-      
-      <!-- 第二章：悟空的星光海 -->
-      <Chapter2WukongSea
-        :isActive="currentChapter === 2"
-        @chapter-complete="onChapterComplete"
+        @next-chapter="goToNextChapter"
       />
 
-    <!-- 第三章：臭臭的零食银河 -->
-    <Chapter3ChouChouGalaxy
-      :isActive="currentChapter === 3"
-      @chapter-complete="onChapterComplete"
-    />
-      
+      <!-- 第二章：悟空的星光海 -->
+      <Chapter2WukongSea
+        :class="getChapterClass(2)"
+        :isActive="currentChapter === 2"
+        @chapter-complete="onChapterComplete"
+        @next-chapter="goToNextChapter"
+        @prev-chapter="goToPrevChapter"
+      />
+
+      <!-- 第三章：臭臭的零食银河 -->
+      <Chapter3ChouChouGalaxy
+        :class="getChapterClass(3)"
+        :isActive="currentChapter === 3"
+        @chapter-complete="onChapterComplete"
+        @next-chapter="goToNextChapter"
+        @prev-chapter="goToPrevChapter"
+      />
+
       <!-- 第四章：白夜的星愿转盘 -->
       <Chapter4StarWishWheel
+        :class="getChapterClass(4)"
         :isActive="currentChapter === 4"
         @chapter-complete="onChapterComplete"
+        @next-chapter="goToNextChapter"
+        @prev-chapter="goToPrevChapter"
       />
 
       <!-- 第五章：温馨小家贺卡 -->
       <Chapter5WarmHome
+        :class="getChapterClass(5)"
         :isActive="currentChapter === 5"
         @chapter-complete="onChapterComplete"
+        @prev-chapter="goToPrevChapter"
       />
     </div>
+
+
 
     <!-- 全局开发者信件弹窗 -->
     <GlobalDeveloperLetter />
@@ -55,34 +70,39 @@ import GlobalDeveloperLetter from './components/GlobalDeveloperLetter.vue'
 
 // 响应式状态
 const currentChapter = ref(1)
+const maxUnlockedChapter = ref(1) // 最大可访问章节
 const container = ref(null)
 
-// 滚动处理 - 核心原理：根据滚动位置切换章节（节流优化）
-let scrollTimeout = null
-const handleScroll = (event) => {
-  // 使用节流优化性能
-  if (scrollTimeout) return
+// 章节导航控制
+const goToNextChapter = () => {
+  if (currentChapter.value < 5) {
+    currentChapter.value++
+    maxUnlockedChapter.value = Math.max(maxUnlockedChapter.value, currentChapter.value)
 
-  scrollTimeout = setTimeout(() => {
-    const scrollTop = event.target.scrollTop
-    const windowHeight = window.innerHeight
-
-    // 计算当前章节（每个章节占一个屏幕高度）
-    const chapter = Math.floor(scrollTop / windowHeight) + 1
-    const newChapter = Math.min(chapter, 4)
-
-    // 只在章节真正改变时更新
-    if (newChapter !== currentChapter.value) {
-      currentChapter.value = newChapter
-
-      // 标记游戏完成状态
-      if (newChapter === 4) {
-        localStorage.setItem('gameComplete', 'true')
-      }
+    // 标记游戏完成状态
+    if (currentChapter.value === 5) {
+      localStorage.setItem('gameComplete', 'true')
     }
+  }
+}
 
-    scrollTimeout = null
-  }, 16) // 约60fps
+const goToPrevChapter = () => {
+  if (currentChapter.value > 1) {
+    currentChapter.value--
+  }
+}
+
+
+
+// 获取章节CSS类
+const getChapterClass = (chapterNum) => {
+  if (chapterNum === currentChapter.value) {
+    return 'chapter active'
+  } else if (chapterNum < currentChapter.value) {
+    return 'chapter prev'
+  } else {
+    return 'chapter next'
+  }
 }
 
 // 章节完成处理
@@ -91,10 +111,39 @@ const onChapterComplete = (chapterNumber) => {
   // 可以在这里添加全局状态管理
 }
 
+// 禁用页面滚动
+const disableScroll = () => {
+  document.body.style.overflow = 'hidden'
+  document.addEventListener('wheel', preventDefault, { passive: false })
+  document.addEventListener('touchmove', preventDefault, { passive: false })
+  document.addEventListener('keydown', preventScrollKeys, { passive: false })
+}
+
+const preventDefault = (e) => {
+  e.preventDefault()
+}
+
+const preventScrollKeys = (e) => {
+  // 禁用方向键、空格键、Page Up/Down等滚动按键
+  const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40]
+  if (scrollKeys.includes(e.keyCode)) {
+    e.preventDefault()
+  }
+}
+
 // 组件挂载后的初始化
 onMounted(() => {
   // 创建星空效果
   createStars()
+
+  // 禁用页面滚动
+  disableScroll()
+
+  // 从localStorage恢复进度
+  const savedProgress = localStorage.getItem('maxUnlockedChapter')
+  if (savedProgress) {
+    maxUnlockedChapter.value = parseInt(savedProgress)
+  }
 })
 
 // 创建星空背景效果（性能优化版）
@@ -187,25 +236,37 @@ const createStars = () => {
   position: relative;
   z-index: 1;
   height: 100vh;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  /* 性能优化 */
-  will-change: scroll-position;
+  overflow: hidden; /* 禁用滚动 */
+  backface-visibility: hidden;
   transform: translateZ(0); /* 启用硬件加速 */
-  -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
 }
 
-/* 滚动条样式 */
-.chapters-container::-webkit-scrollbar {
-  width: 8px;
+/* 章节固定视窗布局 */
+.chapter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(100%); /* 默认隐藏在右侧 */
+  z-index: 1;
 }
 
-.chapters-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+.chapter.active {
+  transform: translateX(0); /* 当前章节显示 */
+  z-index: 2;
 }
 
-.chapters-container::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+.chapter.prev {
+  transform: translateX(-100%); /* 前一章节隐藏在左侧 */
+  z-index: 1;
 }
+
+.chapter.next {
+  transform: translateX(100%); /* 后续章节隐藏在右侧 */
+  z-index: 1;
+}
+
+
 </style>

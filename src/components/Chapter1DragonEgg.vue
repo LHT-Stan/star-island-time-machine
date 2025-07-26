@@ -366,30 +366,26 @@ const closeMemoryCard = () => {
   showMemoryCard.value = false
 }
 
-// 导航到下一章（防抖处理）
+// 导航到下一章（发射事件给父组件）
 const isNavigating = ref(false)
+const emit = defineEmits(['next-chapter'])
+
 const goToNextChapter = () => {
   if (isNavigating.value) return
 
   isNavigating.value = true
 
   try {
-    // 平滑滚动到下一章
-    const container = document.querySelector('.chapters-container')
-    if (container) {
-      container.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
-      })
-    }
+    // 发射事件给父组件进行章节切换
+    emit('next-chapter')
   } catch (error) {
     console.log('导航错误:', error)
   }
 
-  // 2秒后重置导航状态
+  // 重置导航状态
   setTimeout(() => {
     isNavigating.value = false
-  }, 2000)
+  }, 500)
 }
 
 // 更新友谊时间（带错误处理）

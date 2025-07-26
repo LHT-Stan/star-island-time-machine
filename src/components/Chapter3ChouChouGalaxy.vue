@@ -800,28 +800,25 @@ const playCleanSound = () => {
   }
 }
 
-// 导航到下一章
+// 导航到下一章（发射事件给父组件）
+const emit = defineEmits(['next-chapter'])
+
 const goToNextChapter = () => {
   console.log('🚀 前往第四章')
   if (isNavigating.value) return
-  
+
   isNavigating.value = true
-  
+
   try {
-    const container = document.querySelector('.chapters-container')
-    if (container) {
-      container.scrollTo({
-        top: window.innerHeight * 3, // 第四章
-        behavior: 'smooth'
-      })
-    }
+    // 发射事件给父组件进行章节切换
+    emit('next-chapter')
   } catch (error) {
     console.log('导航错误:', error)
   }
-  
+
   setTimeout(() => {
     isNavigating.value = false
-  }, 2000)
+  }, 500)
 }
 
 // 监听章节激活状态
