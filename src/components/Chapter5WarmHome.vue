@@ -81,7 +81,7 @@
       </div>
 
       <!-- 信件查看入口 -->
-      <div class="letter-access-btn" @click="openLetterMenu" v-if="checkLetterUnlockStatus().wukongLetterUnlocked || checkLetterUnlockStatus().developerLetterUnlocked">
+      <div class="letter-access-btn" @click="openLetterMenu" v-if="letterUnlockStatus.wukongLetterUnlocked || letterUnlockStatus.developerLetterUnlocked">
         <div class="letter-icon">💌</div>
         <div class="letter-text">查看信件</div>
       </div>
@@ -195,7 +195,7 @@
           </div>
           <div class="menu-options">
             <button
-              v-if="checkLetterUnlockStatus().wukongLetterUnlocked"
+              v-if="letterUnlockStatus.wukongLetterUnlocked"
               class="letter-option wukong-option"
               @click="openWukongLetter"
             >
@@ -207,7 +207,7 @@
             </button>
 
             <button
-              v-if="checkLetterUnlockStatus().developerLetterUnlocked"
+              v-if="letterUnlockStatus.developerLetterUnlocked"
               class="letter-option developer-option"
               @click="openDeveloperLetter"
             >
@@ -251,7 +251,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, watch, computed } from 'vue'
 import numberCollector from '../utils/numberCollector.js'
 import roomImageUrl from '../assets/images/room.jpg'
 import catImageUrl from '../assets/images/chouchou_cat1.png'
@@ -288,6 +288,11 @@ export default {
     // 检查是否应该显示数字0（基于收集顺序）
     const shouldShowNumber0 = computed(() => {
       return numberCollector.shouldShowNumber(5, 0)
+    })
+
+    // 信件解锁状态计算属性
+    const letterUnlockStatus = computed(() => {
+      return checkLetterUnlockStatus()
     })
 
     // 信件查看系统
@@ -734,6 +739,7 @@ export default {
       showWukongLetterReview,
       showDeveloperLetterReview,
       checkLetterUnlockStatus,
+      letterUnlockStatus,
       openLetterMenu,
       closeLetterMenu,
       openWukongLetter,
