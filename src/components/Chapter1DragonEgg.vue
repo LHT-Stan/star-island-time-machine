@@ -4,19 +4,19 @@
     <div class="crystal-background">
       <img src="/images/Crystal_Island.png" alt="水晶岛背景" />
       <div class="background-overlay"></div>
+    </div>
 
-      <!-- 隐藏的数字收集区域 (只有孵化后才能点击) -->
-      <div
-        v-if="isHatched && !numberCollected"
-        class="secret-crystal-area"
-        @click="handleCrystalClick"
-        :title="`点击次数: ${crystalClicks}/1`"
-      >
-        <!-- 数字8显示区域 -->
-        <div v-if="isHatched && !numberCollected" class="crystal-number" :class="{ 'fully-visible': showCrystalNumber, 'faintly-visible': !showCrystalNumber }">
-          <span class="number-reflection" @click="handleNumber8Click" :style="{ cursor: showCrystalNumber ? 'pointer' : 'default' }">8</span>
-          <div v-if="showCrystalNumber" class="reflection-hint">神秘数字8</div>
-        </div>
+    <!-- 隐藏的数字收集区域 (移到背景外，避免被遮挡) -->
+    <div
+      v-if="isHatched && !numberCollected"
+      class="secret-crystal-area"
+      @click="handleCrystalClick"
+      :title="`点击次数: ${crystalClicks}/1`"
+    >
+      <!-- 数字8显示区域 -->
+      <div v-if="isHatched && !numberCollected" class="crystal-number" :class="{ 'fully-visible': showCrystalNumber, 'faintly-visible': !showCrystalNumber }">
+        <span class="number-reflection" @click="handleNumber8Click" :style="{ cursor: showCrystalNumber ? 'pointer' : 'default' }">8</span>
+        <div v-if="showCrystalNumber" class="reflection-hint">神秘数字8</div>
       </div>
     </div>
 
