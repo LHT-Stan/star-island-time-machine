@@ -10,7 +10,7 @@
         v-if="isHatched && !numberCollected"
         class="secret-crystal-area"
         @click="handleCrystalClick"
-        :title="`点击次数: ${crystalClicks}/3`"
+        :title="`点击次数: ${crystalClicks}/1`"
       >
         <!-- 数字8显示区域 -->
         <div v-if="isHatched && !numberCollected" class="crystal-number" :class="{ 'fully-visible': showCrystalNumber, 'faintly-visible': !showCrystalNumber }">
@@ -433,12 +433,12 @@ const handleCrystalClick = () => {
   if (numberCollected.value || !isHatched.value) return
 
   crystalClicks.value++
-  console.log(`💎 水晶点击次数: ${crystalClicks.value}/3`)
+  console.log(`💎 水晶点击次数: ${crystalClicks.value}/1`)
 
   // 播放水晶点击音效
   playSound('crystal-click')
 
-  if (crystalClicks.value === 3) {
+  if (crystalClicks.value === 1) {
     // 显示数字8
     showCrystalNumber.value = true
     console.log('✨ 水晶反射中出现了数字8!')
