@@ -178,7 +178,7 @@
     <!-- 返回按钮 -->
     <div class="prev-navigation-button">
       <button @click="goToPrevChapter" class="prev-chapter-btn">
-        ← 上一章
+        ← 
       </button>
     </div>
   </div>
@@ -1444,7 +1444,11 @@ export default {
       showNumber3,
       number3Collected,
       shouldShowNumber3,
-      handleNumber3Click
+      handleNumber3Click,
+
+      // 导航相关
+      goToNextChapter,
+      goToPrevChapter
     }
   }
 }
@@ -2844,8 +2848,8 @@ export default {
 /* 返回按钮样式 */
 .prev-navigation-button {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 10px;
+  left: 10px;
   z-index: 10;
 }
 
@@ -2855,7 +2859,7 @@ export default {
   border-radius: 25px;
   padding: 12px 24px;
   color: white;
-  font-size: 16px;
+  font-size: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
