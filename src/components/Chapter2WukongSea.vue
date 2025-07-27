@@ -255,7 +255,7 @@
         aria-label="返回第一章：龙蛋启航"
       >
         <span class="btn-arrow">←</span>
-        <span class="btn-text">上一章</span>
+
       </button>
     </div>
   </div>
@@ -2089,8 +2089,8 @@ onMounted(() => {
 /* 返回按钮 */
 .prev-navigation-button {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 10px;
+  left: 10px;
   z-index: 10;
 }
 

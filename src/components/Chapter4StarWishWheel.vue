@@ -2849,7 +2849,7 @@ export default {
 .prev-navigation-button {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 5px;
   z-index: 10;
 }
 
@@ -2859,7 +2859,7 @@ export default {
   border-radius: 25px;
   padding: 12px 24px;
   color: white;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;

@@ -210,7 +210,6 @@
         :disabled="isNavigating"
       >
         <span class="btn-text">下一章</span>
-        <span class="btn-arrow">→</span>
       </button>
     </div>
     <!-- 返回按钮 -->
@@ -220,7 +219,6 @@
         class="prev-chapter-btn"
         aria-label="返回第二章：悟空的星光海"
       >
-        <span class="btn-arrow">←</span>
         <span class="btn-text">上一章</span>
       </button>
     </div>
@@ -1703,7 +1701,7 @@ onMounted(() => {
 }
 
 .btn-text {
-  font-size: 11px;
+  font-size: 8px;
   text-align: center;
   line-height: 1.2;
 }
@@ -1767,7 +1765,7 @@ onMounted(() => {
 }
 
 .btn-arrow {
-  font-size: 18px;
+  font-size: 8px;
   transition: transform 0.3s ease;
 }
 
