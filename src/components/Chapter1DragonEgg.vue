@@ -211,7 +211,7 @@ const props = defineProps({
 })
 
 // Emits
-const emit = defineEmits(['chapter-complete'])
+const emit = defineEmits(['chapter-complete', 'next-chapter'])
 
 // 响应式状态
 const isHatching = ref(false)
@@ -368,7 +368,6 @@ const closeMemoryCard = () => {
 
 // 导航到下一章（发射事件给父组件）
 const isNavigating = ref(false)
-const emit = defineEmits(['next-chapter'])
 
 const goToNextChapter = () => {
   if (isNavigating.value) return

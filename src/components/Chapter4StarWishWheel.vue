@@ -476,11 +476,19 @@ export default {
       }
       gameStats.lastSpinTime = new Date().toISOString()
 
-      // 检查数字3解锁条件：完成5次抽奖
-      if (gameStats.totalSpins >= 5 && !number3Collected.value) {
+      // 检查数字3解锁条件：完成3次抽奖
+      if (gameStats.totalSpins >= 3 && !number3Collected.value) {
         showNumber3.value = true
-        console.log('✨ 完成5次抽奖！数字3解锁！')
+        console.log('✨ 完成3次抽奖！数字3解锁！')
         console.log('当前抽奖次数:', gameStats.totalSpins)
+      }
+
+      // 检查导航按钮显示条件：完成3次抽奖
+      if (gameStats.totalSpins >= 3 && !showNavigationButton.value) {
+        setTimeout(() => {
+          showNavigationButton.value = true
+          console.log('🚀 完成3次抽奖，显示下一章按钮')
+        }, 1000)
       }
 
       try {
@@ -984,6 +992,12 @@ export default {
         // 显示收集成功对话
         currentDialogue.value = '一个神秘的数字，似乎代表了什么意义。'
         showDialogue.value = true
+
+        // 显示导航按钮
+        setTimeout(() => {
+          showNavigationButton.value = true
+          console.log('🚀 显示下一章按钮')
+        }, 2000)
       }
     }
 
@@ -1190,7 +1204,7 @@ export default {
 
     // 开始冷却时间
     const startCooldown = () => {
-      cooldownTime.value = 3 // 30秒冷却
+      cooldownTime.value = 1 
       const timer = setInterval(() => {
         cooldownTime.value--
         if (cooldownTime.value <= 0) {

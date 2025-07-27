@@ -120,6 +120,32 @@ const disableScroll = () => {
 }
 
 const preventDefault = (e) => {
+  // 检查事件是否发生在可滚动的弹窗内
+  const scrollableElements = [
+    '.letter-content',
+    '.wukong-letter-modal',
+    '.wukong-letter-content',
+    '.developer-letter-modal',
+    '.developer-letter-content',
+    '.global-developer-modal',
+    '.result-modal',
+    '.card-modal',
+    '.collection-modal',
+    '.memory-modal',
+    '.card-content',
+    '.collection-content',
+    '.memory-content',
+    '.card-scroll'
+  ]
+
+  // 检查事件目标是否在可滚动元素内
+  for (const selector of scrollableElements) {
+    const element = document.querySelector(selector)
+    if (element && element.contains(e.target)) {
+      return // 不阻止弹窗内的滚动
+    }
+  }
+
   e.preventDefault()
 }
 

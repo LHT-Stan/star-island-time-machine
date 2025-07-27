@@ -951,7 +951,7 @@ export default {
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  z-index: 5;
+  z-index: 100;
   box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
 }
 

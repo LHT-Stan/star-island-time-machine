@@ -197,6 +197,7 @@
           <h3>悟空的秘密信件</h3>
         </div>
         <div class="letter-body">
+          <div class="scroll-hint">↓ 向下滑动查看完整信件 ↓</div>
           <div class="letter-text">
             <p class="greeting">亲爱的小主人：</p>
             <p>虽然我已经不能再陪在你身边，但我想告诉你一些秘密...</p>
@@ -205,6 +206,9 @@
             <p>还有那些深夜，当你玩游戏玩到很晚时，我会悄悄守在你脚边，用我的体温为你驱散寒冷和孤独。</p>
             <p>现在，请不要为我难过。我在星空中很快乐，因为我能看到你每天都在成长，都在变得更加坚强和美好。</p>
             <p>答应我，要好好照顾自己，要开心地生活。当你想我的时候，就抬头看看星空，我会在最亮的那颗星上向你摇尾巴。</p>
+            <p>我还想告诉你更多的秘密...</p>
+            <p>现在我在星空中，遇到了很多朋友，但我最想念的还是和你在一起的时光。每当夜深人静的时候，我都会透过云层看着你，默默守护着你的梦境。</p>
+            <p>请记住，无论何时何地，我都会是你最忠诚的朋友。即使我们暂时分别，但我们的心永远连在一起。</p>
             <p class="signature">永远爱你的，<br>悟空 🐕✨</p>
           </div>
         </div>
@@ -254,8 +258,8 @@ const props = defineProps({
   isActive: Boolean
 })
 
-// Emits  
-const emit = defineEmits(['chapter-complete'])
+// Emits
+const emit = defineEmits(['chapter-complete', 'next-chapter'])
 
 // 响应式状态
 const showParticles = ref(false)
@@ -555,8 +559,6 @@ const getCelebrationStarStyle = (index) => {
 // 删除不需要的摩斯密码相关方法
 
 // 导航到下一章（发射事件给父组件）
-const emit = defineEmits(['next-chapter'])
-
 const goToNextChapter = () => {
   console.log('🚀 下一章按钮被点击')
 
@@ -1690,7 +1692,9 @@ onMounted(() => {
   max-width: 600px;
   width: 90%;
   max-height: 80vh;
-  overflow-y: auto;
+  overflow-y: auto !important; /* 强制启用滚动，不受全局禁用影响 */
+  -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+  overscroll-behavior: contain; /* 防止滚动穿透 */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   animation: letterSlideUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
@@ -1728,6 +1732,43 @@ onMounted(() => {
 
 .letter-body {
   margin-bottom: 25px;
+  min-height: 400px; /* 确保有足够高度触发滚动 */
+}
+
+.scroll-hint {
+  text-align: center;
+  color: #DAA520;
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding: 8px;
+  background: rgba(218, 165, 32, 0.1);
+  border-radius: 8px;
+  animation: scrollHintPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollHintPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* 自定义滚动条样式 */
+.letter-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letter-content::-webkit-scrollbar-track {
+  background: rgba(218, 165, 32, 0.2);
+  border-radius: 4px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #DAA520, #B8860B);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.letter-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #B8860B, #DAA520);
 }
 
 .letter-text {
