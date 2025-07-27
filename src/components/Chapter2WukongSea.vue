@@ -424,25 +424,45 @@ const triggerFirstEasterEgg = () => {
 
 // 直接显示数字1,1的函数
 const showNumbers = () => {
-  console.log('直接显示数字1,1')
+  console.log('🔥 showNumbers函数开始执行')
+
+  // 详细调试信息
+  console.log('数字1_1收集状态:', number1_1_collected.value)
+  console.log('数字1_2收集状态:', number1_2_collected.value)
+  console.log('数字1_1显示状态:', showNumber1_1.value)
+  console.log('数字1_2显示状态:', showNumber1_2.value)
 
   // 触发第四章悟空信件解锁
   window.dispatchEvent(new CustomEvent('unlockWukongLetter'))
 
   // 显示数字1,1 (5秒内可点击) - 只要还有未收集的数字就显示
-  if (!number1_1_collected.value || !number1_2_collected.value) {
+  const condition = !number1_1_collected.value || !number1_2_collected.value
+  console.log('显示条件判断:', condition)
+
+  if (condition) {
+    console.log('✅ 满足显示条件，开始显示数字')
+
     if (!number1_1_collected.value) {
+      console.log('显示数字1_1')
       showNumber1_1.value = true
     }
     if (!number1_2_collected.value) {
+      console.log('显示数字1_2')
       showNumber1_2.value = true
     }
+
+    console.log('设置闪烁效果')
     flashingNumbers.value = true
 
     setTimeout(() => {
+      console.log('5秒后停止闪烁')
       flashingNumbers.value = false
     }, 5000)
+  } else {
+    console.log('❌ 不满足显示条件，数字1,1都已收集')
   }
+
+  console.log('🔥 showNumbers函数执行完成')
 }
 
 // 关闭悟空信件
