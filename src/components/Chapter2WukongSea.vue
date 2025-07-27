@@ -769,6 +769,13 @@ watch(() => props.isActive, (newVal) => {
   console.log('📱 第二章激活状态变化:', newVal)
   if (newVal) {
     console.log('🌟 第二章被激活：悟空的星光海')
+
+    // 重置数字显示状态，确保数字不会自动显示
+    showNumber1_1.value = false
+    showNumber1_2.value = false
+    flashingNumbers.value = false
+    console.log('🔄 重置数字显示状态')
+
     console.log('当前所有状态:')
     console.log('- showMemoryDrawer:', showMemoryDrawer.value)
     console.log('- showWishSuccess:', showWishSuccess.value)
