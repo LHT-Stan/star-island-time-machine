@@ -178,7 +178,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, onUnmounted, computed, Teleport } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, computed, watch, Teleport } from 'vue'
 import spiritImageUrl from '../assets/images/baiye.jpg'
 import numberCollector from '../utils/numberCollector.js'
 
@@ -186,6 +186,12 @@ export default {
   name: 'Chapter4StarWishWheel',
   components: {
     Teleport
+  },
+  props: {
+    isActive: {
+      type: Boolean,
+      default: false
+    }
   },
   emits: ['next-chapter'],
   setup(props, { emit }) {
@@ -476,18 +482,22 @@ export default {
       }
       gameStats.lastSpinTime = new Date().toISOString()
 
-      // 检查数字3解锁条件：完成3次抽奖
-      if (gameStats.totalSpins >= 3 && !number3Collected.value) {
+      // 检查数字3解锁条件：完成3次抽奖且满足收集顺序
+      if (gameStats.totalSpins >= 3 &&
+          !number3Collected.value &&
+          numberCollector.shouldShowNumber(4, 3)) {
         showNumber3.value = true
-        console.log('✨ 完成3次抽奖！数字3解锁！')
+        console.log('✨ 完成3次抽奖且满足收集顺序！数字3解锁！')
         console.log('当前抽奖次数:', gameStats.totalSpins)
       }
 
-      // 检查导航按钮显示条件：完成3次抽奖
-      if (gameStats.totalSpins >= 3 && !showNavigationButton.value) {
+      // 检查导航按钮显示条件：完成3次抽奖且满足收集顺序
+      if (gameStats.totalSpins >= 3 &&
+          !showNavigationButton.value &&
+          numberCollector.shouldShowNumber(4, 3)) {
         setTimeout(() => {
           showNavigationButton.value = true
-          console.log('🚀 完成3次抽奖，显示下一章按钮')
+          console.log('🚀 完成3次抽奖且满足收集顺序，显示下一章按钮')
         }, 1000)
       }
 
@@ -1342,6 +1352,29 @@ export default {
         console.log('🎵 结果音效播放失败:', error)
       }
     }
+
+    // 监听章节激活状态
+    watch(() => props.isActive, (newVal) => {
+      if (newVal) {
+        console.log('🎯 第四章激活，检查数字3显示条件')
+
+        // 检查是否应该显示数字3
+        if (gameStats.totalSpins >= 3 &&
+            !number3Collected.value &&
+            numberCollector.shouldShowNumber(4, 3)) {
+          showNumber3.value = true
+          console.log('✨ 重新激活时显示数字3')
+        }
+
+        // 检查是否应该显示导航按钮
+        if (gameStats.totalSpins >= 3 &&
+            !showNavigationButton.value &&
+            numberCollector.shouldShowNumber(4, 3)) {
+          showNavigationButton.value = true
+          console.log('🚀 重新激活时显示下一章按钮')
+        }
+      }
+    })
 
     // 生命周期
     onMounted(() => {
