@@ -429,7 +429,6 @@ const showNumbers = () => {
   console.log('数字1_2收集状态:', number1_2_collected.value)
   console.log('数字1_1显示状态:', showNumber1_1.value)
   console.log('数字1_2显示状态:', showNumber1_2.value)
-  console.log('shouldShowNumbers状态:', shouldShowNumbers.value)
   console.log('numberCollector.shouldShowNumber(2, 1):', numberCollector.shouldShowNumber(2, 1))
 
   // 触发第四章悟空信件解锁
