@@ -200,7 +200,7 @@ export default {
     const showDialogue = ref(true)
     const showResult = ref(false)
     const showCollectionModal = ref(false)
-    const showNavigationButton = ref(false)
+    const showNavigationButton = ref(true)
     const cooldownTime = ref(0)
     const wheelRef = ref(null)
     const highlightedSector = ref(-1) // 当前高亮的扇形
@@ -491,15 +491,7 @@ export default {
         console.log('当前抽奖次数:', gameStats.totalSpins)
       }
 
-      // 检查导航按钮显示条件：完成3次抽奖且满足收集顺序
-      if (gameStats.totalSpins >= 3 &&
-          !showNavigationButton.value &&
-          numberCollector.shouldShowNumber(4, 3)) {
-        setTimeout(() => {
-          showNavigationButton.value = true
-          console.log('🚀 完成3次抽奖且满足收集顺序，显示下一章按钮')
-        }, 1000)
-      }
+      // 导航按钮已设置为初始显示，无需额外条件
 
       try {
         // 1. 计算抽奖结果
@@ -1003,11 +995,7 @@ export default {
         currentDialogue.value = '一个神秘的数字，似乎代表了什么意义。'
         showDialogue.value = true
 
-        // 显示导航按钮
-        setTimeout(() => {
-          showNavigationButton.value = true
-          console.log('🚀 显示下一章按钮')
-        }, 2000)
+        // 导航按钮已设置为初始显示
       }
     }
 
@@ -1366,13 +1354,7 @@ export default {
           console.log('✨ 重新激活时显示数字3')
         }
 
-        // 检查是否应该显示导航按钮
-        if (gameStats.totalSpins >= 3 &&
-            !showNavigationButton.value &&
-            numberCollector.shouldShowNumber(4, 3)) {
-          showNavigationButton.value = true
-          console.log('🚀 重新激活时显示下一章按钮')
-        }
+        // 导航按钮已设置为初始显示
       }
     })
 
