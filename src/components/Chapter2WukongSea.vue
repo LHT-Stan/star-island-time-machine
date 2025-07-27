@@ -395,22 +395,30 @@ const triggerFirstEasterEgg = () => {
   showFirstEasterEgg.value = true
   console.log('显示第一层彩蛋庆祝动画')
 
-  // 3秒后隐藏庆祝动画，根据数字8收集状态决定行为
+  // 3秒后隐藏庆祝动画，根据信件查看状态决定行为
   setTimeout(() => {
     console.log('3秒后隐藏庆祝动画')
     showFirstEasterEgg.value = false
 
-    // 检查数字8是否已收集
+    // 检查用户是否已经查看过悟空信件
+    const hasViewedLetter = localStorage.getItem('wukongLetterViewed')
     const number8Collected = numberCollector.isNumberCollected(8)
+
+    console.log('悟空信件查看状态:', hasViewedLetter)
     console.log('数字8收集状态:', number8Collected)
 
-    if (number8Collected) {
-      // 数字8已收集，直接显示数字1,1
-      console.log('数字8已收集，直接显示数字1,1')
+    if (!hasViewedLetter) {
+      // 第一次触发，总是显示信件让用户了解故事
+      console.log('第一次触发彩蛋，显示悟空信件')
+      showWukongLetter.value = true
+      localStorage.setItem('wukongLetterViewed', 'true')
+    } else if (number8Collected) {
+      // 已看过信件且数字8已收集，直接显示数字1,1
+      console.log('已看过信件且数字8已收集，直接显示数字1,1')
       showNumbers()
     } else {
-      // 数字8未收集，显示悟空信件让用户了解机制
-      console.log('数字8未收集，显示悟空信件')
+      // 已看过信件但数字8未收集，再次显示信件
+      console.log('已看过信件但数字8未收集，显示悟空信件')
       showWukongLetter.value = true
     }
 
