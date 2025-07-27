@@ -397,17 +397,52 @@ const triggerFirstEasterEgg = () => {
   showFirstEasterEgg.value = true
   console.log('显示第一层彩蛋庆祝动画')
 
-  // 3秒后隐藏庆祝动画，显示悟空信件
+  // 3秒后隐藏庆祝动画，根据数字8收集状态决定行为
   setTimeout(() => {
-    console.log('3秒后隐藏庆祝动画，显示悟空信件')
+    console.log('3秒后隐藏庆祝动画')
     showFirstEasterEgg.value = false
-    showWukongLetter.value = true
-    console.log('设置 showWukongLetter 为 true:', showWukongLetter.value)
+
+    // 检查数字8是否已收集
+    const number8Collected = numberCollector.isNumberCollected(8)
+    console.log('数字8收集状态:', number8Collected)
+
+    if (number8Collected) {
+      // 数字8已收集，直接显示数字1,1
+      console.log('数字8已收集，直接显示数字1,1')
+      showNumbers()
+    } else {
+      // 数字8未收集，显示悟空信件让用户了解机制
+      console.log('数字8未收集，显示悟空信件')
+      showWukongLetter.value = true
+    }
 
     // 标记悟空信件已解锁，用于第五章查看
     localStorage.setItem('wukongLetterUnlocked', 'true')
     console.log('✅ 悟空信件解锁状态已保存')
   }, 3000)
+}
+
+// 直接显示数字1,1的函数
+const showNumbers = () => {
+  console.log('直接显示数字1,1')
+
+  // 触发第四章悟空信件解锁
+  window.dispatchEvent(new CustomEvent('unlockWukongLetter'))
+
+  // 显示数字1,1 (5秒内可点击) - 只要还有未收集的数字就显示
+  if (!number1_1_collected.value || !number1_2_collected.value) {
+    if (!number1_1_collected.value) {
+      showNumber1_1.value = true
+    }
+    if (!number1_2_collected.value) {
+      showNumber1_2.value = true
+    }
+    flashingNumbers.value = true
+
+    setTimeout(() => {
+      flashingNumbers.value = false
+    }, 5000)
+  }
 }
 
 // 关闭悟空信件

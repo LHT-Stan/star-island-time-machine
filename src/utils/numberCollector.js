@@ -133,6 +133,11 @@ class NumberCollector {
     return !!this.chapterProgress[positionKey]
   }
 
+  // 检查特定数字是否已收集
+  isNumberCollected(number) {
+    return this.collectedNumbers.includes(number)
+  }
+
   // 获取收集提示
   getHint() {
     const progress = this.getProgress()
