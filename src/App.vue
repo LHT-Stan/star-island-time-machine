@@ -295,5 +295,41 @@ const createStars = () => {
   z-index: 1;
 }
 
+/* 移动端点击高亮修复 - 精确定位 */
+img[onclick],
+.clickable,
+.interactive-element,
+button,
+.btn,
+.next-chapter-btn,
+.prev-chapter-btn,
+.letter-access-btn,
+.dragon-egg,
+.chouchou-sprite,
+.wukong-sprite,
+.snack-cloud,
+.photo,
+.memory-photo,
+.card,
+.collection-item,
+.spin-button,
+.option-item,
+.number-display {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  outline: none;
+}
+
+/* 保持文本选择功能 */
+.letter-content,
+.blessing-text,
+.dialogue-text,
+.card-description,
+.memory-text,
+p, span, div.text-content {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
 
 </style>
