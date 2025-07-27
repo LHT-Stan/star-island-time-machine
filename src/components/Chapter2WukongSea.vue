@@ -376,11 +376,13 @@ const onEasterEggStarClick = () => {
   playSound('click')
   console.log('播放彩蛋点击音效')
 
-  // 连续点击5次解锁第一层彩蛋
-  if (easterEggClicks.value >= 5 && !firstEasterEggUnlocked.value) {
+  // 连续点击5次解锁第一层彩蛋（可重复触发）
+  if (easterEggClicks.value >= 5) {
     console.log('🎉 达到5次点击，解锁第一层彩蛋！')
     firstEasterEggUnlocked.value = true
     triggerFirstEasterEgg()
+    // 重置点击计数，允许重复触发
+    easterEggClicks.value = 0
   } else {
     console.log('还需要点击', 5 - easterEggClicks.value, '次解锁彩蛋')
   }
