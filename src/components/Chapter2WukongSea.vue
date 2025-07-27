@@ -292,6 +292,7 @@ const showNumber1_2 = ref(false)
 const number1_1_collected = ref(false)
 const number1_2_collected = ref(false)
 const flashingNumbers = ref(false)
+const showHiddenNumbers = ref(false)
 
 // 检查是否应该显示数字（基于收集顺序）
 const shouldShowNumbers = computed(() => {
@@ -418,10 +419,14 @@ const closeWukongLetter = () => {
   console.log('🔓 触发第四章悟空信件解锁')
   window.dispatchEvent(new CustomEvent('unlockWukongLetter'))
 
-  // 显示数字1,1 (5秒内可点击)
-  if (!number1_1_collected.value && !number1_2_collected.value) {
-    showNumber1_1.value = true
-    showNumber1_2.value = true
+  // 显示数字1,1 (5秒内可点击) - 只要还有未收集的数字就显示
+  if (!number1_1_collected.value || !number1_2_collected.value) {
+    if (!number1_1_collected.value) {
+      showNumber1_1.value = true
+    }
+    if (!number1_2_collected.value) {
+      showNumber1_2.value = true
+    }
     flashingNumbers.value = true
 
     setTimeout(() => {

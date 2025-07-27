@@ -314,7 +314,9 @@ button,
 .collection-item,
 .spin-button,
 .option-item,
-.number-display {
+.number-display,
+.birthday-card,
+.giftbox {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   outline: none;
