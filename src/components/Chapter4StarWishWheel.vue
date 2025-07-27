@@ -174,6 +174,13 @@
         前往第五章 →
       </button>
     </div>
+
+    <!-- 返回按钮 -->
+    <div class="prev-navigation-button">
+      <button @click="goToPrevChapter" class="prev-chapter-btn">
+        ← 上一章
+      </button>
+    </div>
   </div>
 </template>
 
@@ -193,7 +200,7 @@ export default {
       default: false
     }
   },
-  emits: ['next-chapter'],
+  emits: ['next-chapter', 'prev-chapter'],
   setup(props, { emit }) {
     // 基础状态
     const isSpinning = ref(false)
@@ -1221,6 +1228,12 @@ export default {
       } catch (error) {
         console.log('导航错误:', error)
       }
+    }
+
+    // 返回上一章（发射事件给父组件）
+    const goToPrevChapter = () => {
+      console.log('🔙 返回第三章')
+      emit('prev-chapter')
     }
 
     // 播放旋转音效
@@ -2828,6 +2841,32 @@ export default {
   box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
 }
 
+/* 返回按钮样式 */
+.prev-navigation-button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 10;
+}
+
+.prev-chapter-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+}
+
+.prev-chapter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .chapter4-container {
@@ -2878,6 +2917,11 @@ export default {
   .navigation-button {
     bottom: 20px;
     right: 20px;
+  }
+
+  .prev-navigation-button {
+    bottom: 20px;
+    left: 20px;
   }
 }
 </style>

@@ -13,6 +13,7 @@
         :isActive="currentChapter === 1"
         @chapter-complete="onChapterComplete"
         @next-chapter="goToNextChapter"
+        @prev-chapter="goToPrevChapter"
       />
 
       <!-- 第二章：悟空的星光海 -->

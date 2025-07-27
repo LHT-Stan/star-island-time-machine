@@ -246,6 +246,18 @@
         <span class="btn-arrow">→</span>
       </button>
     </div>
+
+    <!-- 返回按钮 -->
+    <div class="prev-navigation-button">
+      <button
+        @click="goToPrevChapter"
+        class="prev-chapter-btn"
+        aria-label="返回第一章：龙蛋启航"
+      >
+        <span class="btn-arrow">←</span>
+        <span class="btn-text">上一章</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -259,7 +271,7 @@ const props = defineProps({
 })
 
 // Emits
-const emit = defineEmits(['chapter-complete', 'next-chapter'])
+const emit = defineEmits(['chapter-complete', 'next-chapter', 'prev-chapter'])
 
 // 响应式状态
 const showParticles = ref(false)
@@ -581,6 +593,13 @@ const goToNextChapter = () => {
     isNavigating.value = false
     console.log('导航状态重置')
   }, 500)
+}
+
+// 返回上一章（发射事件给父组件）
+const goToPrevChapter = () => {
+  console.log('🔙 返回上一章按钮被点击')
+  emit('prev-chapter')
+  console.log('✅ prev-chapter 事件已发射')
 }
 
 // 删除触发隐藏章节方法
@@ -2062,8 +2081,16 @@ onMounted(() => {
 /* 导航按钮 */
 .navigation-button {
   position: absolute;
-  bottom: 120px;
+  bottom: 30px;
   right: 30px;
+  z-index: 10;
+}
+
+/* 返回按钮 */
+.prev-navigation-button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
   z-index: 10;
 }
 
@@ -2113,6 +2140,34 @@ onMounted(() => {
 .next-chapter-btn:disabled:hover {
   background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
   box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+}
+
+/* 返回按钮样式 */
+.prev-chapter-btn {
+  background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: btnFloat 3s ease-in-out infinite;
+}
+
+.prev-chapter-btn:hover {
+  background: linear-gradient(135deg, #9932CC 0%, #BA55D3 100%);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 12px 35px rgba(138, 43, 226, 0.6);
+}
+
+.prev-chapter-btn:hover .btn-arrow {
+  transform: translateX(-3px);
 }
 
 /* 响应式设计 */

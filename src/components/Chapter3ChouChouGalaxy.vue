@@ -10,19 +10,19 @@
     <div class="galaxy-background">
       <!-- 渐变背景 -->
       <div class="gradient-overlay"></div>
-      
+
       <!-- 背景星星 -->
       <div class="background-stars">
-        <div 
-          v-for="i in 30" 
-          :key="i" 
+        <div
+          v-for="i in 30"
+          :key="i"
           class="bg-star"
           :style="getBackgroundStarStyle(i)"
         >
           ✨
         </div>
       </div>
-      
+
       <!-- 零食云朵 -->
       <div class="snack-clouds">
         <div
@@ -52,11 +52,11 @@
         <div class="aura-ring ring-2"></div>
         <div class="aura-ring ring-3"></div>
       </div>
-      
+
       <!-- 臭臭本体 -->
-      <div 
+      <div
         class="chouchou-sprite"
-        :class="{ 
+        :class="{
           happy: chouChouState.mood === 'happy',
           scared: chouChouState.mood === 'scared',
           sleepy: chouChouState.mood === 'sleepy'
@@ -71,7 +71,7 @@
         @keydown.space="onChouChouClick"
       >
         <img src="/images/chouchou.jpg" alt="臭臭" />
-        
+
         <!-- 心情指示器 -->
         <div class="mood-indicator">
           <span v-if="chouChouState.mood === 'happy'">😸</span>
@@ -80,7 +80,7 @@
           <span v-else>😺</span>
         </div>
       </div>
-      
+
       <!-- 舒适度指标 -->
       <div class="comfort-indicators">
         <div class="indicator comfort">
@@ -90,7 +90,7 @@
           </div>
           <span class="value">{{ chouChouState.comfort }}%</span>
         </div>
-        
+
         <div class="indicator trust">
           <span class="icon">🤝</span>
           <div class="bar">
@@ -98,7 +98,7 @@
           </div>
           <span class="value">{{ chouChouState.trust }}%</span>
         </div>
-        
+
         <div class="indicator hunger">
           <span class="icon">🍽️</span>
           <div class="bar">
@@ -203,14 +203,25 @@
 
     <!-- 导航按钮 -->
     <div v-if="showNavigationButton" class="navigation-button">
-      <button 
-        @click="goToNextChapter" 
+      <button
+        @click="goToNextChapter"
         class="next-chapter-btn"
         aria-label="前往第四章"
         :disabled="isNavigating"
       >
         <span class="btn-text">下一章</span>
         <span class="btn-arrow">→</span>
+      </button>
+    </div>
+    <!-- 返回按钮 -->
+    <div class="prev-navigation-button">
+      <button
+        @click="goToPrevChapter"
+        class="prev-chapter-btn"
+        aria-label="返回第二章：悟空的星光海"
+      >
+        <span class="btn-arrow">←</span>
+        <span class="btn-text">上一章</span>
       </button>
     </div>
   </div>
@@ -229,7 +240,7 @@ const props = defineProps({
 })
 
 // Emits
-const emit = defineEmits(['chapter-complete', 'next-chapter'])
+const emit = defineEmits(['chapter-complete', 'next-chapter', 'prev-chapter'])
 
 // 响应式状态
 const showProtectionAura = ref(false)
@@ -262,34 +273,34 @@ const chouChouState = reactive({
 // 找到这个数组定义（约第246行）
 const snackClouds = reactive([
   // 将以下坐标替换为新的优化坐标
-  
+
   // 1. 温牛奶 - 正上方优化
   { emoji: '🥛', style: { top: '25%', left: '50%', animationDelay: '0s' }, name: '温牛奶', collected: false, rarity: 'common' },
-  
+
   // 2. 小鱼干 - 左上方安全区域
   { emoji: '🐟', style: { top: '30%', left: '32%', animationDelay: '1s' }, name: '小鱼干', collected: false, rarity: 'common' },
-  
+
   // 3. 猫咪饼干 - 正右方
   { emoji: '🍪', style: { top: '50%', left: '75%', animationDelay: '2s' }, name: '猫咪饼干', collected: false, rarity: 'common' },
-  
+
   // 4. 肉肉条 - 右下方安全区域
   { emoji: '🥩', style: { top: '80%', left: '90%', animationDelay: '3s' }, name: '肉肉条', collected: false, rarity: 'rare' },
-  
+
   // 5. 奶酪块 - 正下方
   { emoji: '🧀', style: { top: '65%', left: '75%', animationDelay: '4s' }, name: '奶酪块', collected: false, rarity: 'common' },
-  
+
   // 6. 小虾仁 - 左下方安全区域
   { emoji: '🍤', style: { top: '70%', left: '14%', animationDelay: '5s' }, name: '小虾仁', collected: false, rarity: 'rare' },
-  
+
   // 7. 甜甜圈 - 正左方安全区域
   { emoji: '🥯', style: { top: '50%', left: '25%', animationDelay: '6s' }, name: '甜甜圈', collected: false, rarity: 'common' },
-  
+
   // 8. 蜂蜜 - 右上方（史诗零食）
   { emoji: '🍯', style: { top: '30%', left: '68%', animationDelay: '7s' }, name: '蜂蜜', collected: false, rarity: 'epic' },
-  
+
   // 9. 椒盐卷饼 - 右上内圈
   { emoji: '🥨', style: { top: '40%', left: '62%', animationDelay: '8s' }, name: '椒盐卷饼', collected: false, rarity: 'common' },
-  
+
   // 10. 烤肉 - 左下内圈（史诗零食）
   { emoji: '🍖', style: { top: '60%', left: '15%', animationDelay: '9s' }, name: '烤肉', collected: false, rarity: 'epic' }
 ])
@@ -349,7 +360,7 @@ const onChouChouHover = () => {
   console.log('🐱 鼠标悬停在臭臭身上')
   chouChouState.isHovered = true
   showProtectionAura.value = true
-  
+
   // 如果信任度足够，显示开心表情
   if (chouChouState.trust > 50) {
     chouChouState.mood = 'happy'
@@ -361,7 +372,7 @@ const onChouChouLeave = () => {
   console.log('🐱 鼠标离开臭臭')
   chouChouState.isHovered = false
   showProtectionAura.value = false
-  
+
   // 恢复默认心情
   if (chouChouState.mood === 'happy') {
     chouChouState.mood = 'neutral'
@@ -371,13 +382,13 @@ const onChouChouLeave = () => {
 // 臭臭点击处理
 const onChouChouClick = () => {
   console.log('🐱 点击了臭臭')
-  
+
   // 增加信任度
   if (chouChouState.trust < 100) {
     chouChouState.trust = Math.min(100, chouChouState.trust + 10)
     console.log('信任度增加到:', chouChouState.trust)
   }
-  
+
   // 播放温柔音效
   playGentleSound()
 }
@@ -430,22 +441,22 @@ const onSnackCloudClick = (index) => {
 const playGentleSound = () => {
   try {
     if (!window.AudioContext && !window.webkitAudioContext) return
-    
+
     const audioContext = new (window.AudioContext || window.webkitAudioContext)()
     if (audioContext.state === 'suspended') audioContext.resume()
-    
+
     // 创建温柔的音效
     const oscillator = audioContext.createOscillator()
     const gainNode = audioContext.createGain()
-    
+
     oscillator.connect(gainNode)
     gainNode.connect(audioContext.destination)
-    
+
     oscillator.frequency.setValueAtTime(440, audioContext.currentTime)
     oscillator.frequency.exponentialRampToValueAtTime(660, audioContext.currentTime + 0.3)
     gainNode.gain.setValueAtTime(0.1, audioContext.currentTime)
     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5)
-    
+
     oscillator.start()
     oscillator.stop(audioContext.currentTime + 0.5)
   } catch (error) {
@@ -818,13 +829,18 @@ const goToNextChapter = () => {
     isNavigating.value = false
   }, 500)
 }
+// 返回上一章（发射事件给父组件）
+const goToPrevChapter = () => {
+  console.log('🔙 返回第二章')
+  emit('prev-chapter')
+}
 
 // 监听章节激活状态
 watch(() => props.isActive, (newVal) => {
   console.log('📱 第三章激活状态变化:', newVal)
   if (newVal) {
     console.log('🐱 第三章被激活：臭臭的零食银河')
-    
+
     // 3秒后隐藏温柔提示
     setTimeout(() => {
       showGentleHint.value = false
@@ -1777,7 +1793,7 @@ onMounted(() => {
   .snack-cloud {
     transform: scale(0.9); /* 已存在 */
   }
-  
+
   /* 如果需要，可以添加特定零食的位置调整 */
   .snack-cloud:nth-child(7) { /* 甜甜圈 */
     left: 28% !important; /* 移动端稍微右移 */

@@ -252,6 +252,13 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- 返回按钮 -->
+    <div class="prev-navigation-button">
+      <button @click="goToPrevChapter" class="prev-chapter-btn">
+        ← 上一章
+      </button>
+    </div>
   </div>
 </template>
 
@@ -283,7 +290,8 @@ export default {
       default: false
     }
   },
-  setup(props) {
+  emits: ['prev-chapter'],
+  setup(props, { emit }) {
     // 数字收集系统 - 第五章数字0
     const showNumber0 = ref(false)
     const number0Collected = ref(false)
@@ -688,6 +696,12 @@ export default {
       showLetterMenu.value = false
     }
 
+    // 返回上一章（发射事件给父组件）
+    const goToPrevChapter = () => {
+      console.log('🔙 返回第四章')
+      emit('prev-chapter')
+    }
+
     return {
       // 状态
       backgroundLoaded,
@@ -749,7 +763,10 @@ export default {
       closeLetterMenu,
       openWukongLetter,
       closeWukongLetter,
-      openDeveloperLetter
+      openDeveloperLetter,
+
+      // 导航
+      goToPrevChapter
     }
   }
 }
@@ -1690,6 +1707,33 @@ export default {
   margin-top: 15px;
 }
 
+/* 返回按钮样式 */
+.prev-navigation-button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 10;
+}
+
+.prev-chapter-btn {
+  background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+}
+
+.prev-chapter-btn:hover {
+  background: linear-gradient(135deg, #9932CC 0%, #BA55D3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(138, 43, 226, 0.6);
+}
+
 .close-btn {
   position: absolute;
   top: 15px;
@@ -1801,8 +1845,18 @@ export default {
     height: 120px;
   }
 
+  .prev-navigation-button {
+    bottom: 20px;
+    left: 20px;
+  }
+
   .blessing-text {
     font-size: 16px;
+  }
+
+  .prev-navigation-button {
+    bottom: 20px;
+    left: 20px;
   }
 }
 </style>
