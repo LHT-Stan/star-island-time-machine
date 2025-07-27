@@ -36,14 +36,14 @@
     </div>
 
     <!-- 数字1,1显示区域 -->
-    <div v-if="showNumber1_1 && !number1_1_collected && shouldShowNumbers"
+    <div v-if="showNumber1_1 && !number1_1_collected && numberCollector.shouldShowNumber(2, 1)"
          class="number-display number-1-1"
          :class="{ 'flashing': flashingNumbers }"
          @click="handleNumber1Click(1)">
       <span class="number-reflection">1</span>
     </div>
 
-    <div v-if="showNumber1_2 && !number1_2_collected && shouldShowNumbers"
+    <div v-if="showNumber1_2 && !number1_2_collected && numberCollector.shouldShowNumber(2, 1)"
          class="number-display number-1-2"
          :class="{ 'flashing': flashingNumbers }"
          @click="handleNumber1Click(2)">
@@ -262,7 +262,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import numberCollector from '../utils/numberCollector.js'
 
 // Props
@@ -294,10 +294,8 @@ const number1_2_collected = ref(false)
 const flashingNumbers = ref(false)
 const showHiddenNumbers = ref(false)
 
-// 检查是否应该显示数字（基于收集顺序）
-const shouldShowNumbers = computed(() => {
-  return numberCollector.shouldShowNumber(2, 1)
-})
+// 注意：直接在模板中调用 numberCollector.shouldShowNumber(2, 1)
+// 不再需要computed属性，避免响应式追踪问题
 
 // 删除摩斯密码相关配置
 
