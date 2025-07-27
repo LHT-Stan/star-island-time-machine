@@ -424,12 +424,20 @@ const triggerFirstEasterEgg = () => {
 const showNumbers = () => {
   console.log('🔥 showNumbers函数开始执行')
 
+  // 首先检查是否满足收集顺序
+  const canShowNumbers = numberCollector.shouldShowNumber(2, 1)
+  console.log('收集顺序检查:', canShowNumbers)
+
+  if (!canShowNumbers) {
+    console.log('❌ 不满足收集顺序（数字8未收集），不显示数字1,1')
+    return
+  }
+
   // 详细调试信息
   console.log('数字1_1收集状态:', number1_1_collected.value)
   console.log('数字1_2收集状态:', number1_2_collected.value)
   console.log('数字1_1显示状态:', showNumber1_1.value)
   console.log('数字1_2显示状态:', showNumber1_2.value)
-  console.log('numberCollector.shouldShowNumber(2, 1):', numberCollector.shouldShowNumber(2, 1))
 
   // 触发第四章悟空信件解锁
   window.dispatchEvent(new CustomEvent('unlockWukongLetter'))
