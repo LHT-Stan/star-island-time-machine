@@ -1786,6 +1786,41 @@ onMounted(() => {
   box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
 }
 
+/* 返回按钮样式 */
+.prev-navigation-button {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 10;
+}
+
+.prev-chapter-btn {
+  background: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 100%);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: #4B0082;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: btnFloat 3s ease-in-out infinite;
+}
+
+.prev-chapter-btn:hover {
+  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 12px 35px rgba(255, 105, 180, 0.6);
+}
+
+.prev-chapter-btn:hover .btn-arrow {
+  transform: translateX(-3px);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
 
@@ -1920,6 +1955,11 @@ onMounted(() => {
     font-size: 10px;
     top: 3px;
     right: 5px;
+  }
+
+  .prev-navigation-button {
+    top: 20px;
+    left: 20px;
   }
 }
 </style>

@@ -2089,7 +2089,7 @@ onMounted(() => {
 /* 返回按钮 */
 .prev-navigation-button {
   position: absolute;
-  bottom: 30px;
+  top: 30px;
   left: 30px;
   z-index: 10;
 }

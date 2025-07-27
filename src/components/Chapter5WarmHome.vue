@@ -962,8 +962,8 @@ export default {
 /* 信件查看入口 */
 .letter-access-btn {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  bottom: 30px;
+  right: 30px;
   background: linear-gradient(135deg, #8A2BE2 0%, #4B0082 100%);
   border: 2px solid #FFD700;
   border-radius: 15px;
@@ -1710,7 +1710,7 @@ export default {
 /* 返回按钮样式 */
 .prev-navigation-button {
   position: absolute;
-  bottom: 30px;
+  top: 30px;
   left: 30px;
   z-index: 10;
 }
