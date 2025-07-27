@@ -229,7 +229,7 @@ const props = defineProps({
 })
 
 // Emits
-const emit = defineEmits(['chapter-complete'])
+const emit = defineEmits(['chapter-complete', 'next-chapter'])
 
 // 响应式状态
 const showProtectionAura = ref(false)
@@ -801,8 +801,6 @@ const playCleanSound = () => {
 }
 
 // 导航到下一章（发射事件给父组件）
-const emit = defineEmits(['next-chapter'])
-
 const goToNextChapter = () => {
   console.log('🚀 前往第四章')
   if (isNavigating.value) return
