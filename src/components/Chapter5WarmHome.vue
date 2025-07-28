@@ -1718,8 +1718,10 @@ export default {
   position: absolute;
   top: 30px;
   left: 30px;
+  width: auto;
   height: auto;
   z-index: 10;
+  pointer-events: none; /* 容器不拦截点击事件 */
 }
 
 .prev-chapter-btn {
@@ -1734,6 +1736,7 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+  pointer-events: auto; /* 按钮本身可以点击 */
 }
 
 .prev-chapter-btn:hover {
