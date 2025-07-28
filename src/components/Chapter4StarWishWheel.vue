@@ -186,8 +186,8 @@
 
 <script>
 import { ref, reactive, onMounted, onUnmounted, computed, watch, Teleport } from 'vue'
-import spiritImageUrl from '../assets/images/baiye.jpg'
 import numberCollector from '../utils/numberCollector.js'
+import { flatImageUrls } from '../config/images.js'
 
 export default {
   name: 'Chapter4StarWishWheel',
@@ -202,6 +202,9 @@ export default {
   },
   emits: ['next-chapter', 'prev-chapter'],
   setup(props, { emit }) {
+    // 图片资源
+    const spiritImageUrl = flatImageUrls.friendImageUrl
+
     // 基础状态
     const isSpinning = ref(false)
     const showDialogue = ref(true)

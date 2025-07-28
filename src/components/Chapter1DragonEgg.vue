@@ -2,7 +2,7 @@
   <div class="chapter1" :class="{ active: isActive }">
     <!-- 水晶岛虚化背景 -->
     <div class="crystal-background">
-      <img src="/images/Crystal_Island.png" alt="水晶岛背景" />
+      <img :src="crystalIslandImageUrl" alt="水晶岛背景" />
       <div class="background-overlay"></div>
     </div>
 
@@ -48,7 +48,7 @@
         @keydown.enter="onEggClick"
         @keydown.space="onEggClick"
       >
-        <img src="/images/Wyvern_Egg_Fire.png" alt="火龙蛋" />
+        <img src="../assets/images/Wyvern_Egg_Fire.png" alt="火龙蛋" />
         
         <!-- 蛋壳碎片 -->
         <div v-if="isHatching" class="egg-fragments">
@@ -64,12 +64,12 @@
         <div v-if="isHatched" class="friendship-avatars">
           <div class="avatar-container">
             <div class="avatar">
-              <img src="/images/me.jpg" alt="我" />
+              <img src="../assets/images/chapter1me.jpg" alt="我" />
               <div class="avatar-glow"></div>
             </div>
             <div class="friendship-heart">💖</div>
             <div class="avatar">
-              <img src="/images/her.jpg" alt="她" />
+              <img src="../assets/images/her.jpg" alt="她" />
               <div class="avatar-glow"></div>
             </div>
           </div>
@@ -204,11 +204,15 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, Teleport } from 'vue'
 import numberCollector from '../utils/numberCollector.js'
+import { flatImageUrls } from '../config/images.js'
 
 // Props
 const props = defineProps({
   isActive: Boolean
 })
+
+// 图片资源
+const crystalIslandImageUrl = flatImageUrls.crystalIslandImageUrl
 
 // Emits
 const emit = defineEmits(['chapter-complete', 'next-chapter'])

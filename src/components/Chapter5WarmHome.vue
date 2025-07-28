@@ -265,22 +265,7 @@
 <script>
 import { ref, reactive, onMounted, onUnmounted, watch, computed } from 'vue'
 import numberCollector from '../utils/numberCollector.js'
-import roomImageUrl from '../assets/images/room.jpg'
-import catImageUrl from '../assets/images/chouchou_cat1.png'
-import catStretchImageUrl from '../assets/images/chouhcou_cat2.png'
-import computerTopImageUrl from '../assets/images/computer-top.png'
-import birthdayCardImageUrl from '../assets/images/card.jpg'
-import giftboxImageUrl from '../assets/images/giftbox.png'
-import wukongImageUrl from '../assets/images/wukong_dog.png'
-import friendImageUrl from '../assets/images/baiye.jpg'
-
-// 照片墙图片导入
-import photoWallMe from '../assets/images/photo-wall/me.jpg'
-import photoWallFeier1 from '../assets/images/photo-wall/feir1.jpg'
-import photoWallFeier2 from '../assets/images/photo-wall/ferer2.jpg'
-import photoWallChouchou from '../assets/images/photo-wall/chouchou.jpg'
-import photoWallWukong from '../assets/images/photo-wall/wukong.jpg'
-import photoWallTogether from '../assets/images/photo-wall/feierandchouchou.jpg'
+import { flatImageUrls } from '../config/images.js'
 
 export default {
   name: 'Chapter5WarmHome',
@@ -292,6 +277,22 @@ export default {
   },
   emits: ['prev-chapter'],
   setup(props, { emit }) {
+    // 图片资源
+    const roomImageUrl = flatImageUrls.roomImageUrl
+    const catImageUrl = flatImageUrls.catImageUrl
+    const catStretchImageUrl = flatImageUrls.catStretchImageUrl
+    const computerTopImageUrl = flatImageUrls.computerTopImageUrl
+    const birthdayCardImageUrl = flatImageUrls.birthdayCardImageUrl
+    const giftboxImageUrl = flatImageUrls.giftboxImageUrl
+    const wukongImageUrl = flatImageUrls.wukongImageUrl
+    const friendImageUrl = flatImageUrls.friendImageUrl
+    const photoWallMe = flatImageUrls.photoWallMe
+    const photoWallFeier1 = flatImageUrls.photoWallFeier1
+    const photoWallFeier2 = flatImageUrls.photoWallFeier2
+    const photoWallChouchou = flatImageUrls.photoWallChouchou
+    const photoWallWukong = flatImageUrls.photoWallWukong
+    const photoWallTogether = flatImageUrls.photoWallTogether
+
     // 数字收集系统 - 第五章数字0
     const showNumber0 = ref(false)
     const number0Collected = ref(false)

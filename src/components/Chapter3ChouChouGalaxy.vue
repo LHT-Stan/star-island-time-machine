@@ -70,7 +70,7 @@
         @keydown.enter="onChouChouClick"
         @keydown.space="onChouChouClick"
       >
-        <img src="/images/chouchou.jpg" alt="臭臭" />
+        <img src="../assets/images/photo-wall/chouchou.jpg" alt="臭臭" />
 
         <!-- 心情指示器 -->
         <div class="mood-indicator">
@@ -236,6 +236,9 @@ const props = defineProps({
     default: false
   }
 })
+
+// 图片资源
+const chouchouMainImage = flatImageUrls.chouchouMainImage
 
 // Emits
 const emit = defineEmits(['chapter-complete', 'next-chapter', 'prev-chapter'])

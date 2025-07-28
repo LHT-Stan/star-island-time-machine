@@ -14,7 +14,7 @@
       <div class="scroll-content" v-if="isUnrolled">
         <!-- 中央照片 -->
         <div class="center-photo">
-          <img src="/images/her.jpg" alt="生日女孩" />
+          <img src="../assets/images/her.jpg" alt="生日女孩" />
           <div class="photo-decorations">
             <div class="cat-ears">😺</div>
             <div class="unicorn-horn">🦄</div>
