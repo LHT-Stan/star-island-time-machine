@@ -847,6 +847,11 @@ watch(() => props.isActive, (newVal) => {
     // 重置数字显示状态，确保数字不会自动显示
     showNumber7.value = false
     console.log('🔄 重置数字7显示状态')
+
+    // 检查是否应该显示数字7（如果好感度已经满了）
+    setTimeout(() => {
+      checkNumber7UnlockCondition()
+    }, 500)
     // 3秒后隐藏温柔提示
     setTimeout(() => {
       showGentleHint.value = false
