@@ -569,6 +569,28 @@ const showAchievementNotification = (achievement) => {
   }, 3000)
 }
 
+// 检查数字7解锁条件
+const checkNumber7UnlockCondition = () => {
+  console.log('🔍 检查数字7解锁条件')
+  console.log('当前状态:', {
+    number7Collected: number7Collected.value,
+    comfort: chouChouState.comfort,
+    hunger: chouChouState.hunger,
+    trust: chouChouState.trust,
+    shouldShow: numberCollector.shouldShowNumber(3, 7)
+  })
+
+  if (!number7Collected.value &&
+      chouChouState.comfort === 100 &&
+      chouChouState.hunger === 0 &&
+      chouChouState.trust === 100 &&
+      numberCollector.shouldShowNumber(3, 7)) {
+    showNumber7.value = true
+    console.log('✨ 条件满足，显示数字7！')
+  } else {
+    console.log('❌ 条件不满足，不显示数字7')
+  }
+}
 // 显示操作反馈
 const showActionFeedbackMessage = (icon, message) => {
   actionFeedback.value = { icon, message }
