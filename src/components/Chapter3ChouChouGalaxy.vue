@@ -840,6 +840,9 @@ watch(() => props.isActive, (newVal) => {
   if (newVal) {
     console.log('🐱 第三章被激活：臭臭的零食银河')
 
+    // 重置数字显示状态，确保数字不会自动显示
+    showNumber7.value = false
+    console.log('🔄 重置数字7显示状态')
     // 3秒后隐藏温柔提示
     setTimeout(() => {
       showGentleHint.value = false
