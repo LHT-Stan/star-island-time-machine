@@ -28,12 +28,12 @@ export const imageUrls = {
 
   // 照片墙图片
   photos: {
-    me: `${COS_BASE_URL}/chapter1me.jpg`,
-    feier1: `${COS_BASE_URL}/her.jpg`,
-    feier2: `${COS_BASE_URL}/her.jpg`, // 如果有第二张菲儿照片，需要更新URL
+    me: `${COS_BASE_URL}/photo-wall/me.jpg`,
+    feier1: `${COS_BASE_URL}/photo-wall/feir1.jpg`,
+    feier2: `${COS_BASE_URL}/photo-wall/ferer2.jpg`,
     chouchou: `${COS_BASE_URL}/dog.jpg`,
-    wukong: `${COS_BASE_URL}/dog.jpg`, // 如果有悟空照片，需要更新URL
-    together: `${COS_BASE_URL}/her.jpg` // 如果有合影，需要更新URL
+    wukong: `${COS_BASE_URL}/photo-wall/wukong.jpg`,
+    together: `${COS_BASE_URL}/photo-wall/feierandchouchou.jpg`
   },
 
   // 第三章臭臭图片
