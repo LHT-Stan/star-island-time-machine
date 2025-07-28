@@ -48,7 +48,7 @@
         @keydown.enter="onEggClick"
         @keydown.space="onEggClick"
       >
-        <img src="../assets/images/Wyvern_Egg_Fire.png" alt="火龙蛋" />
+        <img :src="dragonEggImageUrl" alt="火龙蛋" />
         
         <!-- 蛋壳碎片 -->
         <div v-if="isHatching" class="egg-fragments">
@@ -213,6 +213,7 @@ const props = defineProps({
 
 // 图片资源
 const crystalIslandImageUrl = flatImageUrls.crystalIslandImageUrl
+const dragonEggImageUrl = flatImageUrls.dragonEggImageUrl
 
 // Emits
 const emit = defineEmits(['chapter-complete', 'next-chapter'])
