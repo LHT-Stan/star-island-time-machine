@@ -304,8 +304,13 @@ export default {
       return numberCollector.shouldShowNumber(5, 0)
     })
 
+    // 信件解锁状态触发器
+    const letterStatusTrigger = ref(0)
+
     // 信件解锁状态计算属性
     const letterUnlockStatus = computed(() => {
+      // 依赖触发器，确保响应式更新
+      letterStatusTrigger.value
       return checkLetterUnlockStatus()
     })
 
@@ -366,6 +371,9 @@ export default {
         // 章节激活时重新加载数据
         setTimeout(() => {
           loadCollectedCards()
+          // 强制更新信件解锁状态
+          letterStatusTrigger.value++
+          console.log('🔄 强制更新信件解锁状态')
         }, 100)
       }
     })
@@ -649,6 +657,12 @@ export default {
 
         // 显示收集成功提示
         showHint('一串神秘的数字，似乎代表了什么意义。')
+
+        // 触发信件状态更新检查
+        setTimeout(() => {
+          letterStatusTrigger.value++
+          console.log('🔄 数字收集后更新信件解锁状态')
+        }, 100)
       }
     }
 
