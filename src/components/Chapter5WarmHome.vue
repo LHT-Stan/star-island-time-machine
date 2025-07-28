@@ -1712,6 +1712,7 @@ export default {
   position: absolute;
   top: 30px;
   left: 30px;
+    height: auto;
   z-index: 10;
 }
 
@@ -1723,6 +1724,7 @@ export default {
   color: white;
   font-size: 16px;
   font-weight: 600;
+  height: auto;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);

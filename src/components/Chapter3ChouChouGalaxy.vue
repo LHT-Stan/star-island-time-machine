@@ -540,7 +540,8 @@ const checkAchievements = () => {
   if (!number7Collected.value &&
       chouChouState.comfort === 100 &&
       chouChouState.hunger === 0 &&
-      chouChouState.trust === 100) {
+      chouChouState.trust === 100 &&
+      numberCollector.shouldShowNumber(3, 7)) {
     showNumber7.value = true
     console.log('✨ 臭臭所有属性满值！数字7解锁！')
     console.log('当前属性值:', {
