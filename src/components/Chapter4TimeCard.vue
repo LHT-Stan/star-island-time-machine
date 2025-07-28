@@ -14,7 +14,7 @@
       <div class="scroll-content" v-if="isUnrolled">
         <!-- 中央照片 -->
         <div class="center-photo">
-          <img src="../assets/images/her.jpg" alt="生日女孩" />
+          <img :src="herPhotoUrl" alt="生日女孩" />
           <div class="photo-decorations">
             <div class="cat-ears">😺</div>
             <div class="unicorn-horn">🦄</div>
@@ -72,6 +72,10 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
+import { flatImageUrls } from '../config/images.js'
+
+// 图片资源
+const herPhotoUrl = flatImageUrls.photoWallFeier1
 
 // Props
 const props = defineProps({

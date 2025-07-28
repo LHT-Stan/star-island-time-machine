@@ -30,7 +30,7 @@
       @keydown.enter="onSpriteClick"
       @keydown.space="onSpriteClick"
     >
-      <img src="../assets/images/dog.jpg" alt="悟空" />
+      <img :src="wukongPhotoUrl" alt="悟空" />
       <div v-if="showParticles" class="golden-particles"></div>
       <div class="sprite-halo"></div>
     </div>
@@ -120,7 +120,7 @@
         <!-- 悟空头像区域 -->
         <div class="wukong-header">
           <div class="wukong-avatar">
-            <img src="../assets/images/dog.jpg" alt="悟空" />
+            <img :src="wukongPhotoUrl" alt="悟空" />
             <div class="avatar-halo-effect"></div>
           </div>
           <div class="wukong-title">
@@ -264,11 +264,15 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import numberCollector from '../utils/numberCollector.js'
+import { flatImageUrls } from '../config/images.js'
 
 // Props
 const props = defineProps({
   isActive: Boolean
 })
+
+// 图片资源
+const wukongPhotoUrl = flatImageUrls.photoWallChouchou
 
 // Emits
 const emit = defineEmits(['chapter-complete', 'next-chapter', 'prev-chapter'])

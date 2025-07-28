@@ -64,12 +64,12 @@
         <div v-if="isHatched" class="friendship-avatars">
           <div class="avatar-container">
             <div class="avatar">
-              <img src="../assets/images/chapter1me.jpg" alt="我" />
+              <img :src="myPhotoUrl" alt="我" />
               <div class="avatar-glow"></div>
             </div>
             <div class="friendship-heart">💖</div>
             <div class="avatar">
-              <img src="../assets/images/her.jpg" alt="她" />
+              <img :src="herPhotoUrl" alt="她" />
               <div class="avatar-glow"></div>
             </div>
           </div>
@@ -214,6 +214,8 @@ const props = defineProps({
 // 图片资源
 const crystalIslandImageUrl = flatImageUrls.crystalIslandImageUrl
 const dragonEggImageUrl = flatImageUrls.dragonEggImageUrl
+const myPhotoUrl = flatImageUrls.photoWallMe
+const herPhotoUrl = flatImageUrls.photoWallFeier1
 
 // Emits
 const emit = defineEmits(['chapter-complete', 'next-chapter'])
