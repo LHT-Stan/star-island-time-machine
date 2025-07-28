@@ -357,6 +357,11 @@ export default {
     // 监听章节激活状态，重新加载数据
     watch(() => props.isActive, (newVal) => {
       if (newVal) {
+        // 重置数字显示状态，确保数字不会自动显示
+        showNumber0.value = false
+        photoClickSequence.value = []
+        console.log('🔄 重置数字0显示状态和照片点击序列')
+
         // 章节激活时重新加载数据
         setTimeout(() => {
           loadCollectedCards()
@@ -617,10 +622,10 @@ export default {
       const currentSequence = photoClickSequence.value.join(',')
       const targetSequence = correctSequence.join(',')
 
-      if (currentSequence === targetSequence) {
-        // 序列正确，显示数字0
+      if (currentSequence === targetSequence && numberCollector.shouldShowNumber(5, 0)) {
+        // 序列正确且满足收集顺序，显示数字0
         showNumber0.value = true
-        console.log('✨ 照片点击序列正确！数字0解锁！')
+        console.log('✨ 照片点击序列正确且满足收集顺序！数字0解锁！')
 
         // 重置序列
         photoClickSequence.value = []
@@ -1712,7 +1717,7 @@ export default {
   position: absolute;
   top: 30px;
   left: 30px;
-    height: auto;
+  height: auto;
   z-index: 10;
 }
 
