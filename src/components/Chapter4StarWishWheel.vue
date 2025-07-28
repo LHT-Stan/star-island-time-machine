@@ -1451,7 +1451,10 @@ export default {
 
       // 导航相关
       goToNextChapter,
-      goToPrevChapter
+      goToPrevChapter,
+
+      // 图片资源
+      spiritImageUrl
     }
   }
 }
