@@ -70,7 +70,7 @@
         @keydown.enter="onChouChouClick"
         @keydown.space="onChouChouClick"
       >
-        <img src="../assets/images/photo-wall/chouchou.jpg" alt="臭臭" />
+        <img :src="chouchouMainImage" alt="臭臭" />
 
         <!-- 心情指示器 -->
         <div class="mood-indicator">
@@ -228,6 +228,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, watch } from 'vue'
 import numberCollector from '../utils/numberCollector.js'
+import { flatImageUrls } from '../config/images.js'
 
 // Props
 const props = defineProps({
